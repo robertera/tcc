@@ -16,8 +16,7 @@
         "datatables.net-buttons": "^2.2.3",
         "feather-icons": "^4.29.0",
         "flatpickr": "^4.6.13",
-        "trumbowyg": "^2.25.2",
-        "tinymce/tinymce": "^6.2"
+        "trumbowyg": "^2.25.2"
     },
     "devDependencies": {
         "laravel-mix": "^6.0.41",

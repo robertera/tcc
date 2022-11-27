@@ -1,6 +1,12 @@
 window.$ = window.jQuery = require('jquery');
 
-const tinymce = require('tinymce/tinymce')
+const trumbowyg = require('trumbowyg');
+const base64 = require('trumbowyg/plugins/base64/trumbowyg.base64.js');
+const noembed = require('trumbowyg/plugins/noembed/trumbowyg.noembed.js');
+const preformatted = require('trumbowyg/plugins/preformatted/trumbowyg.preformatted.js');
+const colors = require('trumbowyg/plugins/colors/trumbowyg.colors.js');
+const flatpickr = require('flatpickr');
+const feather = require('feather-icons');
 
 require('datatables.net');
 require('datatables.net-buttons');
@@ -10,16 +16,14 @@ require('../../vendor/yajra/laravel-datatables-buttons/src/resources/assets/butt
 $(function() {
   $(".datepicker").flatpickr();
   $('.notification').not('.is-permanent').delay(3000).fadeOut(350);
-  $('#editor').tinymce({
-    selector: 'textarea',
-    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect',
-    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-    tinycomments_mode: 'embedded',
-    tinycomments_author: 'Author name',
-    mergetags_list: [
-      { value: 'First.Name', title: 'First Name' },
-      { value: 'Email', title: 'Email' },
-    ]
+  $('#editor').trumbowyg({
+    btns: [
+      ['formatting'],
+      ['link', 'insertImage', 'base64', 'noembed'],
+      ['preformatted', 'backColor', 'strong', 'em', 'del', 'unorderedList'],
+      ['viewHTML']
+    ],
+    resetCss: true
   });
   $('.file-input').on('change', function () {
     $(this).parent().find('.file-name').removeClass('is-hidden').text(this.value.replace(/.*[\/\\]/, ''));
