@@ -40,7 +40,8 @@ return [
 
     'route' => [
         'prefix' => 'elfinder',
-        'middleware' => 'admin', //Set to null to disable middleware filter
+        'middleware' => 'admin',
+         //Set to null to disable middleware filter
     ],
 
     /*

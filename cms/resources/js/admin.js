@@ -29,6 +29,7 @@ require('../../public/js/tinymce/skins/ui/oxide/skin.css');
 require('../../public/js/tinymce/skins/ui/oxide/content.css');
 
 
+
 $(function () {
     $(".datepicker").flatpickr();
     $(".notification").not(".is-permanent").delay(3000).fadeOut(350);
@@ -48,7 +49,7 @@ $(function () {
     function elFinderBrowser (callback, value, meta) {
         tinymce.activeEditor.windowManager.openUrl({
             title: 'File Manager',
-            url: 'http://127.0.0.1:8000/elfinder#elf_l1_XA',
+            url: 'elfinder/tinymce5',
             /**
              * On message will be triggered by the child window
              * 
