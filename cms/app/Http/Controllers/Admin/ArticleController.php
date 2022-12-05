@@ -100,4 +100,11 @@ class ArticleController extends AdminController
     {
         return ['options' => Category::pluck('title', 'id')];
     }
+
+    public function showTinyMCE5()
+    {
+         $this->app['view']
+            ->make($this->package . '::tinymce5')
+            ->with($this->getViewVars());
+    }
 }
