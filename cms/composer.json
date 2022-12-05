@@ -19,7 +19,6 @@
         "psr/simple-cache": "2.0",
         "spatie/laravel-analytics": "^4.1.0",
         "tinymce/tinymce": "5.x-dev",
-        "unisharp/laravel-filemanager": "dev-master",
         "yajra/laravel-datatables-buttons": "~4.10",
         "yajra/laravel-datatables-oracle": "~9.11"
     },

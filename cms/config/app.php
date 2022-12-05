@@ -185,8 +185,6 @@ return [
         /*
          * Package Service Providers...
          */
-        UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -219,6 +217,5 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
-    'Image' => Intervention\Image\Facades\Image::class,
 ];
 

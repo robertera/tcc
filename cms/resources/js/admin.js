@@ -11,29 +11,29 @@ require("../../vendor/yajra/laravel-datatables-buttons/src/resources/assets/butt
 require("../../public/js/tinymce/tinymce.min.js");
 require("../../public/js/tinymce/jquery.tinymce.js");
 //Import Visual Things
-require("../../public/js/tinymce/themes/silver/theme.js");
-require("../../public/js/tinymce/icons/default/icons.js");
+require('../../public/js/tinymce/themes/silver/theme.js');
+require('../../public/js/tinymce/icons/default/icons.js');
 //Import Plugins
-require("../../public/js/tinymce/plugins/autolink/plugin.js");
-require("../../public/js/tinymce/plugins/link/plugin.js");
-require("../../public/js/tinymce/plugins/image/plugin.js");
-require("../../public/js/tinymce/plugins/preview/plugin.js");
-require("../../public/js/tinymce/plugins/anchor/plugin.js");
-require("../../public/js/tinymce/plugins/insertdatetime/plugin.js");
-require("../../public/js/tinymce/plugins/media/plugin.js");
-require("../../public/js/tinymce/plugins/paste/plugin.js");
-require("../../public/js/tinymce/plugins/imagetools/plugin.js");
+require('../../public/js/tinymce/plugins/autolink/plugin.js');
+require('../../public/js/tinymce/plugins/link/plugin.js');
+require('../../public/js/tinymce/plugins/image/plugin.js');
+require('../../public/js/tinymce/plugins/preview/plugin.js');
+require('../../public/js/tinymce/plugins/anchor/plugin.js');
+require('../../public/js/tinymce/plugins/insertdatetime/plugin.js');
+require('../../public/js/tinymce/plugins/media/plugin.js');
+require('../../public/js/tinymce/plugins/paste/plugin.js');
+require('../../public/js/tinymce/plugins/imagetools/plugin.js');
 //Import Skin things
-require("../../public/js/tinymce/skins/ui/oxide/content.min.css");
-require("../../public/js/tinymce/skins/ui/oxide/skin.css");
-require("../../public/js/tinymce/skins/ui/oxide/content.css");
+require('../../public/js/tinymce/skins/ui/oxide/content.min.css');
+require('../../public/js/tinymce/skins/ui/oxide/skin.css');
+require('../../public/js/tinymce/skins/ui/oxide/content.css');
+
+
 
 $(function () {
     $(".datepicker").flatpickr();
     $(".notification").not(".is-permanent").delay(3000).fadeOut(350);
-    var editor_config = {
-        path_absolute: "/",
-        selector: "textarea#tiny",
+    $("textarea#tiny").tinymce({
         height: 500,
         plugins: [
             "autolink link image preview anchor",
@@ -41,38 +41,47 @@ $(function () {
         ],
         toolbar:
             "undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | link image media",
-        file_picker_callback: function (callback, value, meta) {
-            var x =
-                window.innerWidth ||
-                document.documentElement.clientWidth ||
-                document.getElementsByTagName("body")[0].clientWidth;
-            var y =
-                window.innerHeight ||
-                document.documentElement.clientHeight ||
-                document.getElementsByTagName("body")[0].clientHeight;
+        relative_urls: false,
+        remove_script_host: false,
+        file_picker_callback : elFinderBrowser,
+    });
 
-            var cmsURL =
-                editor_config.path_absolute +
-                "laravel-filemanager?editor=" +
-                meta.fieldname;
-            if (meta.filetype == "image") {
-                cmsURL = cmsURL + "&type=Images";
-            } else {
-                cmsURL = cmsURL + "&type=Files";
+    function elFinderBrowser (callback, value, meta) {
+        tinymce.activeEditor.windowManager.openUrl({
+            title: 'File Manager',
+            url: 'elfinder/tinymce5',
+            /**
+             * On message will be triggered by the child window
+             * 
+             * @param dialogApi
+             * @param details
+             * @see https://www.tiny.cloud/docs/ui-components/urldialog/#configurationoptions
+             */
+            onMessage: function (dialogApi, details) {
+                if (details.mceAction === 'fileSelected') {
+                    const file = details.data.file;
+                    
+                    // Make file info
+                    const info = file.name;
+                    
+                    // Provide file and text for the link dialog
+                    if (meta.filetype === 'file') {
+                        callback(file.url, {text: info, title: info});
+                    }
+                    
+                    // Provide image and alt text for the image dialog
+                    if (meta.filetype === 'image') {
+                        callback(file.url, {alt: info});
+                    }
+                    
+                    // Provide alternative source and posted for the media dialog
+                    if (meta.filetype === 'media') {
+                        callback(file.url);
+                    }
+                    
+                    dialogApi.close();
+                }
             }
-
-            tinyMCE.activeEditor.windowManager.openUrl({
-                url: cmsURL,
-                title: "Filemanager",
-                width: x * 0.8,
-                height: y * 0.8,
-                resizable: "yes",
-                close_previous: "no",
-                onMessage: (api, message) => {
-                    callback(message.content);
-                },
-            });
-        },
-    };
-    tinymce.init(editor_config);
+        });
+    }
 });
