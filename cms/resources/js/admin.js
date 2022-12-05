@@ -29,7 +29,6 @@ require('../../public/js/tinymce/skins/ui/oxide/skin.css');
 require('../../public/js/tinymce/skins/ui/oxide/content.css');
 
 
-
 $(function () {
     $(".datepicker").flatpickr();
     $(".notification").not(".is-permanent").delay(3000).fadeOut(350);

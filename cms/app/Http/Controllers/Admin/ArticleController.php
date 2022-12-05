@@ -103,7 +103,7 @@ class ArticleController extends AdminController
 
     public function showTinyMCE5()
     {
-         $this->app['view']
+        return $this->app['view']
             ->make($this->package . '::tinymce5')
             ->with($this->getViewVars());
     }
