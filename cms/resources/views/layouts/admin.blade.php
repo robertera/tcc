@@ -7,7 +7,7 @@
     <meta name="robots" content="noindex,nofollow">
     <title>{{ empty($t) ? (is_array($title = __(Route::getCurrentRoute()->getName())) ? $title['title'] : $title) : $t }} | {{ config('settings.site_title') }}</title>
     <link rel="stylesheet" type="text/css" href="{{ asset(mix('dist/css/admin.css')) }}">
-    <link rel="shortcut icon" href="{{ asset('i/icons/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('i/icons/fav-icon.ico') }}">
     @stack('styles')
 </head>
 <body>

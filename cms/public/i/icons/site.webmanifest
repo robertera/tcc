@@ -1,10 +1,10 @@
 {
-    "name": "Laravel 5 Simple CMS",
-    "short_name": "Laravel 5 Simple CMS",
+    "name": "CMS Laravel TADS IFPR",
+    "short_name": "Cms TADS IFPR",
     "icons": [
         {
-            "src": "/android-chrome-192x192.png",
-            "sizes": "192x192",
+            "src": "/if-icon.png",
+            "sizes": "250x250",
             "type": "image/png"
         },
         {

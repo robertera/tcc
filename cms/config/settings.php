@@ -2,8 +2,8 @@
 
 return [
     'analytics_id'     => null,
-    'logo'             => 'i/icons/android-chrome-192x192.png',
+    'logo'             => 'i/icons/if-icon.png',
     'login_image'      => 'https://ssl.gstatic.com/accounts/ui/avatar_2x.png',
-    'site_description' => 'CMS IFPR para o eixo de TADS',
+    'site_description' => 'TCC de Roberto Carlos de Assis Junior, TADS20',
     'site_title'       => 'CMS IFPR TADS'
 ];
